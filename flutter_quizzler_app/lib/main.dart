@@ -33,6 +33,12 @@ class _QuizPageState extends State<QuizPage> {
     'A slug\'s blood is green.',
   ];
 
+  List<bool> answers = [
+    false,
+    true,
+    true,
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -70,14 +76,29 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked true.
-                setState(() {
-                  scoreKeeper.add(
-                    Icon(
-                      Icons.check,
-                      color: Colors.green,
-                    ),
-                  );
-                });
+
+                bool correctAnswer =
+                    answers[scoreKeeper.length % questions.length];
+
+                if (correctAnswer == true) {
+                  setState(() {
+                    scoreKeeper.add(
+                      Icon(
+                        Icons.check,
+                        color: Colors.green,
+                      ),
+                    );
+                  });
+                } else {
+                  setState(() {
+                    scoreKeeper.add(
+                      Icon(
+                        Icons.close,
+                        color: Colors.red,
+                      ),
+                    );
+                  });
+                }
               },
             ),
           ),
@@ -96,14 +117,28 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked false.
-                setState(() {
-                  scoreKeeper.add(
-                    Icon(
-                      Icons.close,
-                      color: Colors.red,
-                    ),
-                  );
-                });
+                bool correctAnswer =
+                    answers[scoreKeeper.length % questions.length];
+
+                if (correctAnswer == false) {
+                  setState(() {
+                    scoreKeeper.add(
+                      Icon(
+                        Icons.check,
+                        color: Colors.green,
+                      ),
+                    );
+                  });
+                } else {
+                  setState(() {
+                    scoreKeeper.add(
+                      Icon(
+                        Icons.close,
+                        color: Colors.red,
+                      ),
+                    );
+                  });
+                }
               },
             ),
           ),
